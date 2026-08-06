@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STUDENT UNION :: 학생 소통 공간</title>
+  <!-- Google Fonts: Plus Jakarta Sans & Noto Sans KR -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* DESIGN SYSTEM: VIBRANT YELLOW & MODERN PURPLE ACCENT */
+    :root {
+      --bg-color: #fffde7; /* 아주 밝고 화사한 웜 옐로우 트렌디 배경 */
+      --card-bg: #ffffff;
+      --primary-accent: #6528e0; /* 세련되고 임팩트 있는 퍼플 */
+      --yellow-bright: #ffea00;
+      --yellow-soft: #fff59d;
+      --coral-pop: #ff3366;
+      --text-main: #18181b;
+      --text-muted: #52525b;
+      --border-color: #fef08a;
+      --shadow-soft: 0 20px 40px -15px rgba(234, 179, 8, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Noto Sans KR', 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      /* 은은하고 트렌디한 도트 패턴 */
+      background-image: radial-gradient(#fde047 1.5px, transparent 1.5px);
+      background-size: 28px 28px;
+    }
+
+    /* HEADER & NAV */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 8%;
+      background: rgba(255, 253, 231, 0.9);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--yellow-soft);
+    }
+
+    .logo-badge {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans KR', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      background: #ffffff;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      border: 2px solid var(--text-main);
+      box-shadow: 3px 3px 0px var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: -0.3px;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 1.8rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--primary-accent);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      text-align: center;
+      padding: 4.5rem 1.5rem 3rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      padding: 0.5rem 1.3rem;
+      border-radius: 50px;
+      background: #ffffff;
+      border: 2px solid #facc15;
+      color: #b45309;
+      font-size: 0.9rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 14px rgba(250, 204, 21, 0.25);
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1.35;
+      margin-bottom: 1.2rem;
+      color: var(--text-main);
+      word-break: keep-all;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(180deg, transparent 60%, var(--yellow-bright) 60%);
+      padding: 0 0.3rem;
+      border-radius: 4px;
+    }
+
+    .hero h1 .accent-text {
+      color: var(--primary-accent);
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      font-weight: 500;
+      margin-bottom: 2.5rem;
+      word-break: keep-all;
+      line-height: 1.7;
+    }
+
+    /* TAB SYSTEM */
+    .tab-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .tab-btn {
+      background: #ffffff;
+      border: 2px solid var(--text-main);
+      color: var(--text-main);
+      padding: 0.9rem 2.2rem;
+      border-radius: 18px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 4px 4px 0px var(--text-main);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .tab-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px var(--text-main);
+    }
+
+    .tab-btn.active {
+      background: var(--primary-accent);
+      color: #ffffff;
+      border-color: var(--primary-accent);
+      box-shadow: 4px 4px 0px var(--text-main);
+    }
+
+    /* MAIN CONTAINER */
+    .main-container {
+      max-width: 1050px;
+      margin: 0 auto 5rem;
+      padding: 0 1.5rem;
+    }
+
+    .content-panel {
+      display: none;
+      animation: popUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .content-panel.active {
+      display: block;
+    }
+
+    @keyframes popUp {
+      from { opacity: 0; transform: translateY(20px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* GRID & CARDS */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 28px;
+      padding: 2.2rem;
+      box-shadow: var(--shadow-soft);
+      border: 2px solid #fef08a;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: var(--yellow-bright);
+      box-shadow: 0 25px 45px -15px rgba(234, 179, 8, 0.35);
+    }
+
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .icon-1 { background: #f3e8ff; }
+    .icon-2 { background: #fef9c3; }
+    .icon-3 { background: #e0f2fe; }
+
+    .card-tag {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--primary-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.4rem;
+    }
+
+    .card h3 {
+      font-size: 1.35rem;
+      font-weight: 900;
+      margin-bottom: 0.6rem;
+      color: var(--text-main);
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      margin-bottom: 1.8rem;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    .btn-pop {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.9rem 1.5rem;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.98rem;
+      transition: all 0.2s ease;
+      text-align: center;
+      border: 2px solid var(--text-main);
+      box-shadow: 3px 3px 0px var(--text-main);
+    }
+
+    .btn-pop:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0px var(--text-main);
+    }
+
+    .btn-primary { background: var(--primary-accent); color: #ffffff; border-color: var(--primary-accent); }
+    .btn-yellow { background: var(--yellow-bright); color: var(--text-main); }
+    .btn-blue { background: #38bdf8; color: var(--text-main); }
+
+    /* FORM STYLES */
+    .form-group {
+      margin-bottom: 1.3rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.95rem 1.1rem;
+      background: #fffde7;
+      border: 2px solid #fef08a;
+      border-radius: 16px;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-accent);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(101, 40, 224, 0.1);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 1.1rem;
+      background: var(--coral-pop);
+      border: 2px solid var(--text-main);
+      border-radius: 18px;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 1.05rem;
+      cursor: pointer;
+      box-shadow: 4px 4px 0px var(--text-main);
+      transition: all 0.2s ease;
+    }
+
+    .btn-submit:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px var(--text-main);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.1rem; }
+      .hero p { font-size: 1rem; }
+      .tab-container { flex-direction: column; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-badge">💛 STUDENT UNION</div>
+    <nav>
+      <a href="#" class="active">HOME</a>
+      <a href="#section-main">COMMUNICATION</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-tag">🎉 누구나 즐겁게 참여하는 우리들의 학교</div>
+    <h1>지루했던 학교 생활,<br><span class="highlight">단 한 명도 놓치지 않고</span> <span class="accent-text">재밌어집니다!</span></h1>
+    <p>그동안 학생회 일이나 행사가 먼 이야기처럼 느껴지셨나요?<br>재미있는 이벤트부터 소소한 아이디어 제출까지! 축제처럼 즐겁게 참여하고 함께 변화를 만들어가요.</p>
+    
+    <div class="tab-container" id="section-main">
+      <button class="tab-btn active" onclick="switchTab('tab-communication', event)">📢 학생회소통</button>
+      <button class="tab-btn" onclick="switchTab('tab-participation', event)">💡 학생참여 & 아이디어</button>
+    </div>
+  </section>
+
+  <main class="main-container">
+    
+    <!-- 1. 학생회소통 -->
+    <div id="tab-communication" class="content-panel active">
+      <div class="grid">
+        
+        <!-- 회의록 링크 -->
+        <div class="card">
+          <div>
+            <div class="card-icon icon-1">📑</div>
+            <div class="card-tag">Document</div>
+            <h3>학생회 회의록 열람</h3>
+            <p>우리가 나눈 이야기와 투명한 회의 결과를 구글 드라이브에서 자유롭게 확인해보세요!</p>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1nk1qMis70r_GJLWn4azv3ejwjjiuCf2g?usp=share_link" class="btn-pop btn-primary" target="_blank" rel="noopener noreferrer">
+            📂 회의록 구경하기 &rarr;
+          </a>
+        </div>
+
+        <!-- 설문조사 링크 -->
+        <div class="card">
+          <div>
+            <div class="card-icon icon-2">✏️</div>
+            <div class="card-tag" style="color: #b45309;">Active Survey</div>
+            <h3>진행 중인 이벤트 & 설문</h3>
+            <p>여러분의 솔직한 의견 한 줄이 다음 학교 행사와 변화를 더 흥미진진하게 만듭니다!</p>
+          </div>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSc3a7Aa6wiNwwA2ECtqFX-cTx07exCV6LK-PYbXP2fmKt8Bxw/viewform?usp=publish-editor" class="btn-pop btn-yellow" target="_blank" rel="noopener noreferrer">
+            📝 설문 참여하고 의견 내기 &rarr;
+          </a>
+        </div>
+
+        <!-- 예산 집행 내역 링크 -->
+        <div class="card">
+          <div>
+            <div class="card-icon icon-3">📊</div>
+            <div class="card-tag" style="color: #0369a1;">Transparency</div>
+            <h3>학생회비 집행 내역</h3>
+            <p>여러분의 소중한 학생회비가 어디에 알차게 쓰이고 있는지 정직하게 공개합니다.</p>
+          </div>
+          <a href="https://docs.google.com/spreadsheets/d/14AXoPva9QFYzaq1H-5DaWvDDpRuqFbBCca3Ae01Ew-0/edit?usp=drivesdk" class="btn-pop btn-blue" target="_blank" rel="noopener noreferrer">
+            📈 투명 내역 시트 확인하기 &rarr;
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2. 학생참여 -->
+    <div id="tab-participation" class="content-panel">
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+        
+        <!-- 안건 및 의견 작성 폼 -->
+        <div class="card">
+          <div>
+            <div class="card-tag" style="color: var(--coral-pop);">Submit Proposal</div>
+            <h3>재미있는 아이디어 & 건의함</h3>
+            <p>소소한 궁금증부터 '이런 행사 하면 재밌겠다!' 하는 엉뚱한 아이디어까지 모두 환영합니다.</p>
+            
+            <form id="proposalForm">
+              <div class="form-group">
+                <label>카테고리</label>
+                <select class="form-control" id="category">
+                  <option value="안건제안">💡 재미있는 아이디어 제안</option>
+                  <option value="익명건의">🔒 익명 건의함</option>
+                  <option value="기타">💬 자유 의견</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>작성자 (선택)</label>
+                <input type="text" class="form-control" id="author" placeholder="미입력 시 익명으로 전달돼요!">
+              </div>
+              <div class="form-group">
+                <label>제목</label>
+                <input type="text" class="form-control" id="title" placeholder="한 줄로 알려주세요" required>
+              </div>
+              <div class="form-group">
+                <label>내용</label>
+                <textarea class="form-control" id="content" placeholder="전하고 싶은 솔직한 생각을 자유롭게 남겨주세요!" required></textarea>
+              </div>
+              <button type="submit" class="btn-submit">🚀 아이디어 던지기!</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- 실시간 피드 -->
+        <div class="card">
+          <div>
+            <div class="card-tag">Live Feed</div>
+            <h3>실시간 학생 의견 피드</h3>
+            <p>친구들이 던진 유쾌한 제안들을 학생회가 열심히 검토하고 있어요!</p>
+            
+            <div id="feedList" style="display:flex; flex-direction:column; gap: 1rem; margin-top: 1rem;">
+              <div style="background: #fffde7; padding: 1.2rem; border-radius: 18px; border: 2px solid #fef08a;">
+                <span style="font-size:0.8rem; font-weight:800; color:var(--primary-accent);">[아이디어] 검토 중 ✨</span>
+                <h4 style="font-size:1rem; margin:0.3rem 0; font-weight:800;">시험기간 간식 사업 종류 투표로 정해요!</h4>
+                <p style="font-size:0.88rem; color:var(--text-muted);">매번 정해진 간식 말고 우리가 원하는 걸로 투표해서 받으면 좋겠습니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // 탭 전환 인터랙션
+    function switchTab(tabId, event) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.content-panel').forEach(panel => panel.classList.remove('active'));
+
+      event.target.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    // Google Apps Script (GS) 연동 설정
+    const GAS_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL";
+
+    document.getElementById('proposalForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const data = {
+        category: document.getElementById('category').value,
+        author: document.getElementById('author').value || '익명',
+        title: document.getElementById('title').value,
+        content: document.getElementById('content').value,
+        timestamp: new Date().toLocaleString()
+      };
+
+      if (GAS_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL") {
+        alert("🎉 소중한 아이디어가 제출되었습니다! (GS URL 연동 시 구글 시트로 자동 저장됩니다.)");
+        this.reset();
+        return;
+      }
+
+      fetch(GAS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        alert('🎉 소중한 아이디어가 접수되었습니다. 곧 답변해 드릴게요!');
+        this.reset();
+      })
+      .catch(err => alert('제출 중 오류가 발생했습니다: ' + err));
+    });
+  </script>
+</body>
+</html>
